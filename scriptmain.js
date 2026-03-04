@@ -1,4 +1,4 @@
-const weddingDate = new Date("May 23, 2026 15:00:00").getTime();
+const weddingDate = new Date("Aug 15, 2026 15:00:00").getTime();
 
 const timer = setInterval(function() {
     const now = new Date().getTime();
@@ -45,3 +45,50 @@ document.getElementById('rsvp-form').addEventListener('submit', function(event) 
       alert('Hubo un error: ' + JSON.stringify(err));
     });
 });
+
+window.addEventListener("DOMContentLoaded", () => {
+  const audio = document.getElementById("miMusica");
+  const btnMusica = document.getElementById("btnMusica");
+  const texto = document.getElementById("texto");
+
+  const debeReproducir = localStorage.getItem("reproducirMusica");
+
+  if (debeReproducir === "true") {
+      audio.play();
+      btnMusica.classList.add("sonando");
+      texto.innerText = "Pausar";
+      localStorage.removeItem("reproducirMusica");
+  }
+
+  btnMusica.addEventListener("click", () => {
+      if (audio.paused) {
+          audio.play();
+          btnMusica.classList.add("sonando");
+          texto.innerText = "Pausar";
+      } else {
+          audio.pause();
+          btnMusica.classList.remove("sonando");
+          texto.innerText = "Reproducir canción";
+      }
+  });
+});
+
+function iniciarSonidoMusicaDesdeIntro() {
+  const audio = document.getElementById("miMusica");
+  const btnMusica = document.getElementById("btnMusica");
+  const texto = document.getElementById("texto");
+
+  if (!audio || !btnMusica || !texto) {
+      return;
+  }
+
+  audio.play().then(() => {
+      btnMusica.classList.add("sonando");
+      texto.innerText = "Pausar";
+  }).catch(() => {
+      texto.innerText = "Reproducir canción";
+  });
+}
+
+window.iniciarMusicaDesdeIntro = iniciarSonidoMusicaDesdeIntro;
+
