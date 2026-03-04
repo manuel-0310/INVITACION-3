@@ -33,7 +33,7 @@ document.getElementById('rsvp-form').addEventListener('submit', function(event) 
    btn.innerText = 'ENVIANDO...';
    btn.style.opacity = '0.7';
 
-   emailjs.sendForm('', '', this)
+   emailjs.sendForm('service_6m7prwn', 'template_41pvc6t', this)
     .then(() => {
       btn.innerText = '¡ENVIADO CON ÉXITO!';
       btn.style.backgroundColor = '#27ae60';
